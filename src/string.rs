@@ -14,7 +14,11 @@ pub fn string_slice_experiment() {
     println!("Address of s2: {:p}", s2); // s2에서 "Hello"의 주소 0x...c4
     println!("Address of s2: {:p}", &s2[0..5]); // s2에서 "Hello"의 주소 0x...c4
     // diffrent. 컴파일러 최적화에 따름
-  
+}
+
+pub fn replace_all(string_slice:&str, c: char) -> String {
+    let collected: String = string_slice.chars().filter(|x| *x != c).collect();
+    return collected;
 }
 
 #[cfg(test)]
@@ -32,8 +36,13 @@ mod tests {
     }
 
     #[test]
-    fn test_replace_all() {
+    fn test_string_slice_experiment() {
         string_slice_experiment();
         assert!(true)
+    }
+
+    #[test]
+    fn test_replace_all() {
+        assert_eq!(replace_all("hello", 'l'), String::from("heo"));
     }
 }
