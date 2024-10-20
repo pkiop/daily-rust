@@ -21,6 +21,29 @@ pub fn replace_all(string_slice:&str, c: char) -> String {
     return collected;
 }
 
+pub fn sort(s: &str) -> String {
+    let mut out = String::new();
+    let mut deleted_idx: Vec<usize> = vec!(); 
+    let mut smallest_char: char = 'z';
+    let mut smallest_idx: usize = 0;
+    s.chars().for_each(|_| {
+        s.chars().enumerate().for_each(|(a_idx, a)| {
+            if deleted_idx.contains(&a_idx) {
+                return;
+            }
+            if a < smallest_char {
+                smallest_idx = a_idx;
+                smallest_char = a;
+            }
+        });
+        deleted_idx.push(smallest_idx);
+        out.push(smallest_char);
+        smallest_char = 'z';
+    });
+
+    return out
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -44,5 +67,10 @@ mod tests {
     #[test]
     fn test_replace_all() {
         assert_eq!(replace_all("hello", 'l'), String::from("heo"));
+    }
+
+    #[test]
+    fn test_sort() {
+        assert_eq!(sort("hello"), String::from("ehllo"));
     }
 }
