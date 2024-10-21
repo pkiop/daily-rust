@@ -44,6 +44,14 @@ pub fn sort(s: &str) -> String {
     return out
 }
 
+pub fn include_char(s: &str, c: char) -> bool {
+    let res = s.chars().find(|ch| *ch == c);
+    match res {
+        Some(_) => return true,
+        None => false
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -72,5 +80,11 @@ mod tests {
     #[test]
     fn test_sort() {
         assert_eq!(sort("hello"), String::from("ehllo"));
+    }
+
+    #[test]
+    fn test_include_char() {
+        assert_eq!(include_char("hello", 'o'), true);
+        assert_eq!(include_char("hello", 'z'), false)
     }
 }
