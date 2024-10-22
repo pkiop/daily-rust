@@ -52,6 +52,11 @@ pub fn include_char(s: &str, c: char) -> bool {
     }
 }
 
+pub fn is_palindrome(s: &str) -> bool {
+    let reversed = s.chars().rev().collect::<String>();
+    return s == reversed;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -86,5 +91,11 @@ mod tests {
     fn test_include_char() {
         assert_eq!(include_char("hello", 'o'), true);
         assert_eq!(include_char("hello", 'z'), false)
+    }
+
+    #[test]
+    fn test_is_palindrome() {
+        assert_eq!(is_palindrome("hello"), false);
+        assert_eq!(is_palindrome("level"), true);
     }
 }
